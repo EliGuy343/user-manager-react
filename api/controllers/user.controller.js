@@ -1,23 +1,23 @@
 import User from "../models/User.js";
 
 export const addUser = async (req, res) => {
-    const {fullName, id, phoneNumber, ip} = req.body;
 
-    if(!fullName && !id && !phoneNumber && !ip ) 
-        return res.status(400).send("all fields are required");
-
+    if(!req.body.fullName)
+        return res.status(400).send("full name is missing/invalid");
+    if(!req.body.phoneNumber) 
+        return res.status(400).send("phoneNumber is missing/invalid");
+    if(!req.body.ip)
+        return res.status(400).send("ip is missing/invalid");
+    if(!req.body.id || req.body.id?.length < 9)
+        return res.status(400).send("id is missing/invalid");
+    
     try {
-        const oldUser = await User.findOne({id:id});
+        const oldUser = await User.findOne({id:req.body.id});
 
         if(oldUser)
             return res.status(400).send("user with this id already exists");
 
-        const newUser = new User({
-            fullName:fullName,
-            id:id,
-            phoneNumber:phoneNumber,
-            ip:ip
-        });
+        const newUser = new User(req.body);
         await newUser.save();
         res.status(201).json(newUser);
     }
@@ -45,7 +45,6 @@ export const getUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
     try {
-        console.log(req.query);
         const nameSearch = req.query.name;
         const users = await User.find(
             {"fullName":{$regex: nameSearch || "."}});

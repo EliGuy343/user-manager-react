@@ -7,6 +7,7 @@ const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 7200; 
+
 const connect = async () => {    
     try {
         await mongoose.connect(process.env.MONGO);
@@ -15,7 +16,6 @@ const connect = async () => {
         console.log(error);
     }
 }
-
 mongoose.connection.on("connected", ()=>{
     console.log("MongoDB connected");
 });
