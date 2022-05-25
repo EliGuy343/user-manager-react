@@ -1,5 +1,9 @@
+import { useState } from 'react'
 import './users.css'
+import { AddUser } from '../../modals/addUser/AddUser';
 export const Users = () => {
+
+    const [open, setOpen] = useState(false);
     const users = [
         {
             fullName:"some govnar",
@@ -30,8 +34,9 @@ export const Users = () => {
             location:"unknown"
         },
     ]
-  return (
-    <div>
+    return (
+        <div className='mainDiv'>
+            <AddUser open={open} closeWindow={()=>setOpen(false)}/>
         <div className='userSearch'>
             <h3>Search Users</h3>
             <input type="text" className='searchBar'/>
@@ -43,8 +48,7 @@ export const Users = () => {
                         <th>Name</th>
                         <th>Id</th>
                         <th>Phone Number</th>
-                        <th>IP Address</th>
-                        <th>Location</th>
+                        <th>IP Address</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -55,13 +59,22 @@ export const Users = () => {
                             <td>{user.id}</td>
                             <td>{user.phoneNumber}</td>
                             <td>{user.ip}</td>
-                            <td>{user.location}</td>
-                            <button>Remove</button>
+                            <button className='tableDeleteButton'>
+                                Remove
+                            </button>
+                            <button className='tableLocationButton' >
+                                View Location
+                            </button>
                         </tr>
                     )
                 )}
                 </tbody>
             </table>
+            <div className='addUser'>
+                <button onClick={() => setOpen(true)} className='addUserButton'>
+                    Add Users
+                </button>
+            </div>
         </div>
     </div>
   )

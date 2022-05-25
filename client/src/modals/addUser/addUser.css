@@ -1,0 +1,62 @@
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    z-index: 1;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.userModal {
+    margin-top: 50px;
+    border: 2px solid rgba(0,0,0,0.5);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:50%;
+    align-items: center;
+}
+
+.userForm {
+    width: 70%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.userForm>input {
+    margin: 5px;
+    height: 25px;
+    text-align: center;
+    
+}
+
+.userForm>button {
+    margin-top: 10px;
+    align-self: center;
+    width: 50%;
+    font-size: 18px;
+    border: none;
+    background-color: rgb(11, 191, 59);
+    border-radius: 10px;
+    padding: 10px;
+    color:white;
+    cursor: pointer;
+
+}
+
+.closeButton {
+    margin-top: 10px;
+    align-self: center;
+    width: 35%;
+    font-size: 18px;
+    border: none;
+    background-color: rgb(242, 73, 73);
+    border-radius: 10px;
+    padding: 10px;
+    color:white;
+    cursor: pointer;
+}
