@@ -12,11 +12,17 @@ export const AddUser = ({open,closeWindow}) => {
             <from className="userForm">
                 <input type="text" placeholder="FullName" name="fullName"/>
                 <input type="text" placeholder="id" name="id"/>
-                <input type="text" placeholder="phone Number" name="phone Number"/>
+                <input 
+                    type="text" 
+                    placeholder="phone Number"
+                    name="phone Number"
+                />
                 <input type="text" placeholder="ip" name="ip"/>
                 <button type="submit">Submit</button>
             </from>
-            <button className='closeButton' onClick={closeWindow} >Close</button>
+            <button className='closeButton' onClick={closeWindow} >
+                Close
+            </button>
         </div>
     </div>
   )
