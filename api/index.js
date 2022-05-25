@@ -16,6 +16,7 @@ const connect = async () => {
         console.log(error);
     }
 }
+
 mongoose.connection.on("connected", ()=>{
     console.log("MongoDB connected");
 });
