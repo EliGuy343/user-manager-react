@@ -1,22 +1,36 @@
-import { Fragment, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './users.css'
 import { AddUser } from '../../modals/addUser/AddUser';
 import { UserContext } from '../../context/UserContext';
 import { Spinner } from '../../components/loading/Loading';
+import { UserLocation } from '../../modals/userLocation/UserLocation';
 export const Users = () => {
     const userContext = useContext(UserContext);
     const {loading, users, getUsers, deleteUser} = userContext;
     const [query, setQuery] = useState("");
     const [open, setOpen] = useState(false);
+    const [openLocationWindow, setOpenLocationWindow] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
+    const onClickLocation = (user) => {
+            setCurrentUser(user);
+            setOpenLocationWindow(true);
+    }
+
     useEffect(()=> {
             console.log(users);
             getUsers(query);
         },
     // eslint-disable-next-line
     [query, open]);
+
     return (<> 
             <div className='mainDiv'>
                 <AddUser open={open} closeWindow={()=>setOpen(false)}/>
+                <UserLocation 
+                    open={openLocationWindow}
+                    user={currentUser}
+                    closeWindow={()=>setOpenLocationWindow(false)}
+                />
                 <div className='userSearch'>
                     <h3>Search Users</h3>
                     <input
@@ -48,7 +62,12 @@ export const Users = () => {
                                             className='tableDeleteButton'>
                                             Remove
                                         </button>
-                                        <button className='tableLocationButton'>
+                                        <button 
+                                            className='tableLocationButton'
+                                            onClick={()=>{
+                                                onClickLocation(user)
+                                            }}
+                                        >
                                             View Location
                                         </button>
                                     </td>

@@ -73,18 +73,21 @@ export const AddUser = ({open,closeWindow}) => {
         ip:""
     });
 
-    if(!open)
-        return null
-
+    
     const onChange = e => setUser({...user, [e.target.name]:e.target.value});
     const validateForm = e =>{
         e.preventDefault(); 
         if(validateName(user.fullName) && validateId(user.id) &&
-            validatePhone(user.phoneNumber) && validateIp(user.ip)) {
-                addUser(user);
-                closeWindow();
-            }
-    }
+        validatePhone(user.phoneNumber) && validateIp(user.ip))
+        {
+            addUser(user);
+            closeWindow();
+        }
+    };
+    
+    if(!open)
+        return null
+        
     return (
         <div className="overlay">
             <div className='userModal'>

@@ -1,0 +1,46 @@
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    z-index: 1;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.errorDiv {
+    position: relative;
+    margin-top: 110px;
+}
+
+.locationDiv {
+    position: relative;
+    margin-top: 60px;
+}
+
+.userModal {
+    margin-top: 50px;
+    border: 2px solid rgba(0,0,0,0.5);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:50%;
+    align-items: center;
+}
+
+
+.closeButton {
+    margin-top: 20px;
+    align-self: center;
+    width: 35%;
+    font-size: 14px;
+    border: none;
+    background-color: rgb(242, 73, 73);
+    border-radius: 10px;
+    padding: 10px;
+    color:white;
+    cursor: pointer;
+}
