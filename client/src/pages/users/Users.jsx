@@ -8,9 +8,11 @@ export const Users = () => {
     const {loading, users, getUsers} = userContext;
     const [query, setQuery] = useState("");
     const [open, setOpen] = useState(false);
-    useEffect(()=>{
-        getUsers(query);
-    }, [query])
+    useEffect(()=> {
+            getUsers(query);
+        },
+    // eslint-disable-next-line
+    [query, open]);
     return (<> 
             <div className='mainDiv'>
                 <AddUser open={open} closeWindow={()=>setOpen(false)}/>

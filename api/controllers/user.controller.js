@@ -47,7 +47,7 @@ export const getAllUsers = async (req, res) => {
     try {
         const nameSearch = req.query.name;
         const users = await User.find(
-            {"fullName":{$regex: nameSearch || "."}});
+            {"fullName":{$regex: nameSearch || '.', $options:'i'}});
         res.status(200).json(users);
     } 
     catch (error) {

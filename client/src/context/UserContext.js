@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import {toast} from 'react-toastify';
 import axios from 'axios';
 const INITIAL_STATE = {
     users:[],
@@ -53,12 +54,29 @@ export const UserContextProvider = ({children}) => {
         }
     };
 
+    const addUser = async(user) => {
+        dispatch({type:'LOADING', payload:null});
+        let res;
+        try {
+            res = await axios.post(`http://localhost:7200/api/users`, user); 
+            dispatch({type:"ADD_USER", payload:res.data});
+            toast.success("user Added",
+                    {position:toast.POSITION.BOTTOM_CENTER});
+        } 
+        catch (error) {
+            toast.error(error.response.data,
+                {position:toast.POSITION.BOTTOM_CENTER});
+            console.log(error); 
+        }
+    }
+
     return  (
         <UserContext.Provider
             value={{
                 users: state.users,
                 loading: state.loading,
                 getUsers,
+                addUser,
                 dispatch
             }}
         >
