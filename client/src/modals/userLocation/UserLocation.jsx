@@ -4,8 +4,11 @@ import { Spinner } from '../../components/loading/Loading';
 
 export const UserLocation = ({open,closeWindow, user}) => {
 
-    const {data, loading, error, refetch} = useFetch(user.ip &&
-        `http://ip-api.com/json/${user.ip}`);
+    const {
+        data,
+        loading
+    } = useFetch(`http://ip-api.com/json/${user.ip}`);
+
     if(!open)
         return null
         

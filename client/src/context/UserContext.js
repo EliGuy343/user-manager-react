@@ -45,9 +45,9 @@ export const UserContextProvider = ({children}) => {
         let res;
         try {
             if(nameQuery)
-                res = await axios.get(`http://localhost:7200/api/users?name=${nameQuery}`);
+                res = await axios.get(`/users?name=${nameQuery}`);
             else 
-                res = await axios.get(`http://localhost:7200/api/users`);  
+                res = await axios.get(`/users`);  
             dispatch({type:"NEW_SEARCH", payload:res.data});
         } 
         catch (error) {
@@ -61,7 +61,7 @@ export const UserContextProvider = ({children}) => {
         dispatch({type:'LOADING', payload:null});
         let res;
         try {
-            res = await axios.post(`http://localhost:7200/api/users`, user); 
+            res = await axios.post(`/users`, user); 
             dispatch({type:"ADD_USER", payload:res.data});
             toast.success("user Added",
                     {position:toast.POSITION.BOTTOM_CENTER});
@@ -75,9 +75,8 @@ export const UserContextProvider = ({children}) => {
 
     const deleteUser = async (id) => {
         dispatch({type:'LOADING', payload:null});
-        let res;
         try {
-            res = await axios.delete(`http://localhost:7200/api/users/${id}`);
+            await axios.delete(`/users/${id}`);
             dispatch({type:"DELETE_USER", payload:id});
             toast.success("User successfully deleted",
                 {position:toast.POSITION.BOTTOM_CENTER});
