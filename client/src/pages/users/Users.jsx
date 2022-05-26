@@ -5,10 +5,11 @@ import { UserContext } from '../../context/UserContext';
 import { Spinner } from '../../components/loading/Loading';
 export const Users = () => {
     const userContext = useContext(UserContext);
-    const {loading, users, getUsers} = userContext;
+    const {loading, users, getUsers, deleteUser} = userContext;
     const [query, setQuery] = useState("");
     const [open, setOpen] = useState(false);
     useEffect(()=> {
+            console.log(users);
             getUsers(query);
         },
     // eslint-disable-next-line
@@ -41,12 +42,16 @@ export const Users = () => {
                                     <td>{user.id}</td>
                                     <td>{user.phoneNumber}</td>
                                     <td>{user.ip}</td>
-                                    <button className='tableDeleteButton'>
-                                        Remove
-                                    </button>
-                                    <button className='tableLocationButton'>
-                                        View Location
-                                    </button>
+                                    <td>
+                                        <button 
+                                            onClick={()=> deleteUser(user.id)} 
+                                            className='tableDeleteButton'>
+                                            Remove
+                                        </button>
+                                        <button className='tableLocationButton'>
+                                            View Location
+                                        </button>
+                                    </td>
                                 </tr>
                             )
                         )}

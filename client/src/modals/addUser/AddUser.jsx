@@ -58,7 +58,6 @@ function validateIp(str) {
             {position: toast.POSITION.BOTTOM_CENTER});
         return false;
     }
-    
     return true;
 }
 

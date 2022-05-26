@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 export const UserContext = createContext(INITIAL_STATE);
 
 const UserReducer = (state, action) => {
+    debugger;
     switch(action.type) {
         case "NEW_SEARCH":
             return {
@@ -18,7 +19,7 @@ const UserReducer = (state, action) => {
         case "DELETE_USER":
             return {
                 users: state.users.filter(
-                    user => user.id === action.payload.id
+                    user => user.id !== action.payload
                 ),
                 loading:false
             };
@@ -50,7 +51,9 @@ export const UserContextProvider = ({children}) => {
             dispatch({type:"NEW_SEARCH", payload:res.data});
         } 
         catch (error) {
-           console.log(error); 
+            toast.error(error.response.data,
+                {position:toast.POSITION.BOTTOM_CENTER});
+            console.log(error);
         }
     };
 
@@ -66,10 +69,24 @@ export const UserContextProvider = ({children}) => {
         catch (error) {
             toast.error(error.response.data,
                 {position:toast.POSITION.BOTTOM_CENTER});
-            console.log(error); 
+            console.log(error);
         }
     }
 
+    const deleteUser = async (id) => {
+        dispatch({type:'LOADING', payload:null});
+        let res;
+        try {
+            res = await axios.delete(`http://localhost:7200/api/users/${id}`);
+            dispatch({type:"DELETE_USER", payload:id});
+            toast.success("User successfully deleted",
+                {position:toast.POSITION.BOTTOM_CENTER});
+        } catch (error) {
+            toast.error(error.response.data,
+                {position:toast.POSITION.BOTTOM_CENTER});
+            console.log(error);
+        }
+    }
     return  (
         <UserContext.Provider
             value={{
@@ -77,6 +94,7 @@ export const UserContextProvider = ({children}) => {
                 loading: state.loading,
                 getUsers,
                 addUser,
+                deleteUser,
                 dispatch
             }}
         >
