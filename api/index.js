@@ -26,6 +26,8 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/users', userRoute);
 
+app.use(express.static('../client/build'));
+
 app.listen(PORT, () =>{
     connect();
     console.log(`Listening on port ${PORT}`);
